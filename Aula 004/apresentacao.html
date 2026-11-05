@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula 4 - Modelos de Implantação em Nuvem</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#1a1a2e;color:#fff;overflow:hidden;height:100vh}
+.slide{display:none;width:100%;height:100vh;flex-direction:row;position:relative}
+.slide.active{display:flex}
+.slide-content{flex:0 0 62%;padding:50px 60px;display:flex;flex-direction:column;justify-content:center;overflow-y:auto}
+.slide-img{flex:0 0 38%;background-size:cover;background-position:center;position:relative}
+.slide-img::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#1a1a2e 0%,transparent 30%)}
+.slide-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0d0d1a,#1a1a3e);font-size:5em;opacity:.3}
+.slide-number{position:absolute;bottom:20px;right:40px;font-size:14px;opacity:.5;z-index:10}
+.progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#4facfe,#00f2fe);transition:width .3s;z-index:100}
+h1{font-size:2.8em;margin-bottom:20px;background:linear-gradient(135deg,#4facfe,#00f2fe);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2}
+h2{font-size:2em;margin-bottom:20px;color:#4facfe}
+h3{font-size:1.3em;margin-bottom:12px;color:#00f2fe}
+p,li{font-size:1.1em;line-height:1.7;margin-bottom:8px}
+ul{padding-left:25px}
+li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:15px 0;font-size:.9em}
+th{background:#4facfe22;padding:10px 12px;text-align:left;border-bottom:2px solid #4facfe}
+td{padding:8px 12px;border-bottom:1px solid #333}
+.subtitle{font-size:1.3em;color:#ccc;margin-bottom:30px}
+.highlight{background:#4facfe22;border-left:4px solid #4facfe;padding:12px 18px;margin:12px 0;border-radius:0 8px 8px 0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:25px;margin-top:15px}
+.card{background:#ffffff08;border:1px solid #333;border-radius:12px;padding:20px}
+.card h3{margin-bottom:8px}
+.tag{display:inline-block;background:#4facfe33;padding:3px 10px;border-radius:15px;font-size:.85em;margin:2px}
+.nav{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);display:flex;gap:15px;z-index:100}
+.nav button{background:#4facfe22;border:1px solid #4facfe;color:#fff;padding:10px 25px;border-radius:25px;cursor:pointer;font-size:14px;transition:all .2s}
+.nav button:hover{background:#4facfe;color:#1a1a2e}
+.capa .slide-content{align-items:center;text-align:center}
+@media print{
+body{overflow:visible;height:auto;background:#fff;color:#000}
+.slide{display:flex!important;page-break-after:always;height:100vh;background:#fff;color:#000}
+.slide:last-of-type{page-break-after:avoid}
+.slide-content{color:#000}
+.slide-img{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+.slide-img::before{display:none}
+.slide-img-placeholder{display:none}
+.nav,.progress{display:none!important}
+h1{-webkit-text-fill-color:#1a5276;background:none;color:#1a5276}
+h2{color:#1a5276}h3{color:#2471a3}
+.highlight{background:#eaf2f8;border-left-color:#2471a3;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.card{border-color:#ccc;background:#f9f9f9;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.tag{background:#d4e6f1;color:#1a5276;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+th{background:#d4e6f1;border-bottom-color:#2471a3;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+td{border-bottom-color:#ddd}
+.slide-number{color:#666}
+@page{size:landscape;margin:0}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<!-- Slide 1 -->
+<div class="slide capa active">
+<div class="slide-content">
+<h1>Modelos de Implantação em Nuvem</h1>
+<p class="subtitle">Conceitos e Práticas de Redes Cloud — Aula 4</p>
+<p style="margin-top:30px;color:#aaa">Prof. Alexandre da Costa Tavares Junior</p>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-01.png')"><div class="slide-img-placeholder">☁️</div></div>
+<div class="slide-number">1 / 14</div>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Agenda</h2>
+<ul>
+<li>Recapitulação: Modelos de Serviço</li>
+<li>O que são Modelos de Implantação?</li>
+<li>Nuvem Privada</li>
+<li>Nuvem Pública</li>
+<li>Nuvem Comunitária</li>
+<li>Comparativo entre Modelos</li>
+<li>Critérios de Seleção</li>
+<li>Exemplos Práticos</li>
+<li>Resumo e Próxima Aula</li>
+</ul>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-02.png')"><div class="slide-img-placeholder">📋</div></div>
+<div class="slide-number">2 / 14</div>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Recapitulação</h2>
+<div class="highlight">
+<strong>Aulas Anteriores:</strong><br>
+Aula 1: Cloud Computing e características NIST<br>
+Aula 2: Princípios de Arquitetura em Nuvem<br>
+Aula 3: Tolerância a Falhas, Segurança e Custos
+</div>
+<p style="margin-top:20px"><strong>Conexão com hoje:</strong> Além de COMO os serviços são entregues (IaaS/PaaS/SaaS), precisamos entender PARA QUEM e DE QUE FORMA a infraestrutura é provisionada.</p>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-03.png')"><div class="slide-img-placeholder">🔄</div></div>
+<div class="slide-number">3 / 14</div>
+</div>
+
+<!-- Slide 4 -->
+<div class="slide">
+<div class="slide-content">
+<h2>O que são Modelos de Implantação?</h2>
+<p><strong>Pergunta central:</strong> Quem possui, gerencia e acessa a infraestrutura?</p>
+<div class="highlight">
+<strong>Definição NIST (SP 800-145):</strong> Modelos que determinam como a infraestrutura de nuvem é provisionada e para quem é disponibilizada.
+</div>
+<div class="two-col" style="margin-top:15px">
+<div class="card"><h3>☁️ Nuvem Pública</h3><p>Aberta ao público geral</p></div>
+<div class="card"><h3>🔒 Nuvem Privada</h3><p>Exclusiva de uma organização</p></div>
+<div class="card"><h3>👥 Nuvem Comunitária</h3><p>Compartilhada por setor</p></div>
+<div class="card"><h3>🔗 Nuvem Híbrida</h3><p>Combinação (próxima aula)</p></div>
+</div>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-04.png')"><div class="slide-img-placeholder">🏗️</div></div>
+<div class="slide-number">4 / 14</div>
+</div>
+
+<!-- Slide 5 -->
+<div class="slide">
+<div class="slide-content">
+<h2>🔒 Nuvem Privada</h2>
+<p><strong>Definição:</strong> Infraestrutura para uso exclusivo de UMA organização.</p>
+<div class="two-col">
+<div>
+<h3>✅ Vantagens</h3>
+<ul>
+<li>Controle total sobre segurança</li>
+<li>Isolamento físico</li>
+<li>Customização para cargas específicas</li>
+</ul>
+</div>
+<div>
+<h3>⚠️ Limitações</h3>
+<ul>
+<li>Custo elevado (CapEx)</li>
+<li>Escalabilidade limitada</li>
+<li>Equipe especializada necessária</li>
+</ul>
+</div>
+</div>
+<p style="margin-top:15px"><strong>Tecnologias:</strong> <span class="tag">VMware vSphere</span> <span class="tag">OpenStack</span> <span class="tag">Azure Stack Hub</span></p>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-05.png')"><div class="slide-img-placeholder">🏢</div></div>
+<div class="slide-number">5 / 14</div>
+</div>
+
+<!-- Slide 6 -->
+<div class="slide">
+<div class="slide-content">
+<h2>☁️ Nuvem Pública</h2>
+<p><strong>Definição:</strong> Infraestrutura aberta ao público, pertencente ao provedor.</p>
+<div class="two-col">
+<div>
+<h3>✅ Vantagens</h3>
+<ul>
+<li>Economia de escala massiva</li>
+<li>Elasticidade ilimitada</li>
+<li>Modelo OpEx (pay-as-you-go)</li>
+<li>Provisionamento instantâneo</li>
+</ul>
+</div>
+<div>
+<h3>⚠️ Considerações</h3>
+<ul>
+<li>Controle parcial</li>
+<li>Multilocatário</li>
+<li>Dependência do provedor</li>
+</ul>
+</div>
+</div>
+<p style="margin-top:15px"><strong>Provedores:</strong> <span class="tag">AWS</span> <span class="tag">Azure</span> <span class="tag">Google Cloud</span></p>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-06.png')"><div class="slide-img-placeholder">🌐</div></div>
+<div class="slide-number">6 / 14</div>
+</div>
+
+<!-- Slide 7 -->
+<div class="slide">
+<div class="slide-content">
+<h2>👥 Nuvem Comunitária</h2>
+<p><strong>Definição:</strong> Infraestrutura compartilhada entre organizações com preocupações comuns.</p>
+<div class="two-col">
+<div>
+<h3>✅ Vantagens</h3>
+<ul>
+<li>Custos divididos entre membros</li>
+<li>Compliance setorial padronizado</li>
+<li>Governança colaborativa</li>
+</ul>
+</div>
+<div>
+<h3>⚠️ Considerações</h3>
+<ul>
+<li>Menor flexibilidade</li>
+<li>Coordenação entre membros</li>
+<li>Escala limitada à comunidade</li>
+</ul>
+</div>
+</div>
+<p style="margin-top:15px"><strong>Exemplos:</strong> <span class="tag">SINAPAD</span> <span class="tag">Cooperativas financeiras</span> <span class="tag">Nuvens governamentais</span></p>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-07.png')"><div class="slide-img-placeholder">🏥</div></div>
+<div class="slide-number">7 / 14</div>
+</div>
+
+<!-- Slide 8 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Comparativo entre Modelos</h2>
+<table>
+<tr><th>Critério</th><th>Pública</th><th>Privada</th><th>Comunitária</th></tr>
+<tr><td><strong>Custo inicial</strong></td><td>Baixo (OpEx)</td><td>Alto (CapEx)</td><td>Médio</td></tr>
+<tr><td><strong>Escalabilidade</strong></td><td>Muito alta</td><td>Limitada</td><td>Moderada</td></tr>
+<tr><td><strong>Controle</strong></td><td>Parcial</td><td>Total</td><td>Compartilhado</td></tr>
+<tr><td><strong>Compliance</strong></td><td>Genérico</td><td>Customizável</td><td>Setorial</td></tr>
+<tr><td><strong>Segurança física</strong></td><td>Provedor</td><td>Organização</td><td>Comunidade</td></tr>
+<tr><td><strong>Inovação</strong></td><td>Alta</td><td>Moderada</td><td>Moderada</td></tr>
+</table>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-08.png')"><div class="slide-img-placeholder">📊</div></div>
+<div class="slide-number">8 / 14</div>
+</div>
+
+<!-- Slide 9 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Critérios de Seleção</h2>
+<h3>Perguntas-chave para a decisão:</h3>
+<ul>
+<li>🔒 Os dados são altamente sensíveis?</li>
+<li>💰 Há orçamento para investimento inicial?</li>
+<li>📈 A demanda é previsível ou variável?</li>
+<li>🏛️ Existem regulamentações setoriais?</li>
+<li>⚡ Velocidade de inovação é prioridade?</li>
+</ul>
+<div class="highlight" style="margin-top:15px">
+<strong>Regra prática:</strong><br>
+Sensível + regulação → Privada<br>
+Orçamento limitado + escala → Pública<br>
+Regulação setorial + custos compartilhados → Comunitária
+</div>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-09.png')"><div class="slide-img-placeholder">🔀</div></div>
+<div class="slide-number">9 / 14</div>
+</div>
+
+<!-- Slide 10 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Exemplos Práticos</h2>
+<table>
+<tr><th>Cenário</th><th>Modelo</th><th>Motivo</th></tr>
+<tr><td>Startup em crescimento</td><td>Pública</td><td>Elasticidade + zero CapEx</td></tr>
+<tr><td>Banco com dados sigilosos</td><td>Privada</td><td>Controle + compliance BACEN</td></tr>
+<tr><td>Rede de universidades</td><td>Comunitária</td><td>Custos compartilhados + HPC</td></tr>
+<tr><td>Hospital com prontuários</td><td>Privada</td><td>LGPD + regulação saúde</td></tr>
+<tr><td>E-commerce Black Friday</td><td>Pública</td><td>Picos de demanda</td></tr>
+</table>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-10.png')"><div class="slide-img-placeholder">🏭</div></div>
+<div class="slide-number">10 / 14</div>
+</div>
+
+<!-- Slide 11 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Provedores e Suas Ofertas</h2>
+<div class="two-col">
+<div class="card">
+<h3>🟠 AWS</h3>
+<ul><li>Pública: EC2, S3, Lambda</li><li>Privada Virtual: VPC</li><li>Extensão: AWS Outposts</li></ul>
+</div>
+<div class="card">
+<h3>🔵 Microsoft Azure</h3>
+<ul><li>Pública: VMs, Blob Storage</li><li>Privada: Azure Stack Hub</li><li>Governo: Azure Government</li></ul>
+</div>
+</div>
+<div class="card" style="margin-top:15px">
+<h3>🟡 Google Cloud</h3>
+<ul><li>Pública: Compute Engine, GCS</li><li>Híbrida: Anthos</li><li>Governo: GCP for Government</li></ul>
+</div>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-11.png')"><div class="slide-img-placeholder">🏗️</div></div>
+<div class="slide-number">11 / 14</div>
+</div>
+
+<!-- Slide 12 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Resumo</h2>
+<div class="highlight">
+<strong>Pontos-chave desta aula:</strong>
+<ul style="margin-top:10px">
+<li>Modelos de implantação definem QUEM acessa e COMO é provisionada</li>
+<li>Privada = controle total + custo elevado</li>
+<li>Pública = economia + elasticidade + responsabilidade compartilhada</li>
+<li>Comunitária = compartilhamento setorial + compliance</li>
+<li>A escolha depende de: custo, segurança, compliance, escalabilidade</li>
+</ul>
+</div>
+<p style="margin-top:20px;font-size:1.2em"><strong>Próxima aula:</strong> Nuvem Híbrida e Multi-cloud</p>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-12.png')"><div class="slide-img-placeholder">✅</div></div>
+<div class="slide-number">12 / 14</div>
+</div>
+
+<!-- Slide 13 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Referências</h2>
+<ul>
+<li>ARMBRUST, M. et al. A view of cloud computing. <em>Communications of the ACM</em>, v. 53, n. 4, 2010.</li>
+<li>KAVIS, M. J. <em>Architecting the Cloud</em>. Hoboken: Wiley, 2014.</li>
+<li>MELL, P.; GRANCE, T. <em>The NIST Definition of Cloud Computing</em>. SP 800-145. NIST, 2011.</li>
+<li>VERAS, M. <em>Cloud Computing</em>. 2. ed. Rio de Janeiro: Brasport, 2019.</li>
+</ul>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-13.png')"><div class="slide-img-placeholder">📚</div></div>
+<div class="slide-number">13 / 14</div>
+</div>
+
+<!-- Slide 14 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Atividade</h2>
+<div class="card">
+<h3>📝 Tarefa Formativa (TF)</h3>
+<p>Responda às 8 questões objetivas sobre Modelos de Implantação em Nuvem.</p>
+</div>
+<div class="card" style="margin-top:20px">
+<h3>💭 Para reflexão</h3>
+<p>Em qual modelo de implantação você classificaria a infraestrutura da organização onde trabalha? Justifique considerando os critérios discutidos.</p>
+</div>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-14.png')"><div class="slide-img-placeholder">✍️</div></div>
+<div class="slide-number">14 / 14</div>
+</div>
+
+<!-- Navegação -->
+<div class="nav">
+<button onclick="prevSlide()">← Anterior</button>
+<button onclick="toggleFullscreen()">⛶ Tela Cheia</button>
+<button onclick="nextSlide()">Próximo →</button>
+</div>
+
+<script>
+let current=0;
+const slides=document.querySelectorAll('.slide');
+const total=slides.length;
+const progress=document.getElementById('progress');
+function showSlide(n){
+slides[current].classList.remove('active');
+current=((n%total)+total)%total;
+slides[current].classList.add('active');
+progress.style.width=((current+1)/total*100)+'%';
+}
+function nextSlide(){showSlide(current+1)}
+function prevSlide(){showSlide(current-1)}
+function toggleFullscreen(){
+if(!document.fullscreenElement)document.documentElement.requestFullscreen();
+else document.exitFullscreen();
+}
+document.addEventListener('keydown',e=>{
+if(e.key==='ArrowRight'||e.key===' ')nextSlide();
+if(e.key==='ArrowLeft')prevSlide();
+if(e.key==='f')toggleFullscreen();
+});
+document.addEventListener('click',e=>{
+if(e.target.tagName!=='BUTTON'){
+const x=e.clientX/window.innerWidth;
+if(x>.65)nextSlide();else if(x<.35)prevSlide();
+}
+});
+</script>
+</body>
+</html>

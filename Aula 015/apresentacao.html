@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula 15 - Revisão Geral do Curso</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#1a1a2e;color:#fff;overflow:hidden;height:100vh}
+.slide{display:none;width:100%;height:100vh;flex-direction:row;position:relative}
+.slide.active{display:flex}
+.slide-content{flex:0 0 62%;padding:50px 60px;display:flex;flex-direction:column;justify-content:center;overflow-y:auto}
+.slide-img{flex:0 0 38%;background-size:cover;background-position:center;position:relative}
+.slide-img::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#1a1a2e 0%,transparent 30%)}
+.slide-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0d0d1a,#1a1a3e);font-size:5em;opacity:.3}
+.slide-number{position:absolute;bottom:20px;right:40px;font-size:14px;opacity:.5;z-index:10}
+.progress{position:fixed;top:0;left:0;height:4px;background:linear-gradient(90deg,#4facfe,#7f5af0,#2cb67d,#f2c94c);transition:width .3s;z-index:100}
+h1{font-size:2.8em;margin-bottom:20px;background:linear-gradient(135deg,#4facfe,#7f5af0,#2cb67d);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2}
+h2{font-size:2em;margin-bottom:20px;color:#7f5af0}
+h3{font-size:1.3em;margin-bottom:12px;color:#2cb67d}
+p,li{font-size:1.1em;line-height:1.7;margin-bottom:8px}
+ul,ol{padding-left:25px}
+li{margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:15px 0;font-size:.9em}
+th{background:#7f5af022;padding:10px 12px;text-align:left;border-bottom:2px solid #7f5af0}
+td{padding:8px 12px;border-bottom:1px solid #333}
+.subtitle{font-size:1.3em;color:#ccc;margin-bottom:30px}
+.highlight{background:#7f5af022;border-left:4px solid #7f5af0;padding:12px 18px;margin:12px 0;border-radius:0 8px 8px 0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:25px;margin-top:15px}
+.card{background:#ffffff08;border:1px solid #333;border-radius:12px;padding:20px}
+.card h3{margin-bottom:8px}
+.tag{display:inline-block;background:#7f5af033;padding:3px 10px;border-radius:15px;font-size:.85em;margin:2px}
+.nav{position:fixed;bottom:30px;left:50%;transform:translateX(-50%);display:flex;gap:15px;z-index:100}
+.nav button{background:#7f5af022;border:1px solid #7f5af0;color:#fff;padding:10px 25px;border-radius:25px;cursor:pointer;font-size:14px;transition:all .2s}
+.nav button:hover{background:#7f5af0;color:#1a1a2e}
+.capa .slide-content{align-items:center;text-align:center}
+pre{background:#0d0d1a;border:1px solid #333;border-radius:8px;padding:15px;font-size:.85em;overflow-x:auto;margin:10px 0}
+code{font-family:'Fira Code',monospace}
+@media print{
+body{overflow:visible;height:auto;background:#fff;color:#000}
+.slide{display:flex!important;page-break-after:always;height:100vh;background:#fff;color:#000}
+.slide:last-of-type{page-break-after:avoid}
+.slide-content{color:#000}
+.slide-img{-webkit-print-color-adjust:exact;print-color-adjust:exact;color-adjust:exact}
+.slide-img::before{display:none}
+.slide-img-placeholder{display:none}
+.nav,.progress{display:none!important}
+h1{-webkit-text-fill-color:#5b3fa8;background:none;color:#5b3fa8}
+h2{color:#5b3fa8}h3{color:#1e7d54}
+.highlight{background:#f0ecfb;border-left-color:#5b3fa8;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.card{border-color:#ccc;background:#f9f9f9;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.tag{background:#e0d7f7;color:#5b3fa8;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+th{background:#e0d7f7;border-bottom-color:#5b3fa8;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+td{border-bottom-color:#ddd}
+pre{background:#f5f5f5;border-color:#ddd}
+.slide-number{color:#666}
+@page{size:landscape;margin:0}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+
+<!-- Slide 1 -->
+<div class="slide capa active">
+<div class="slide-content">
+<h1>Revisão Geral do Curso</h1>
+<p class="subtitle">Conceitos e Práticas de Redes Cloud — Aula 15</p>
+<p style="margin-top:30px;color:#aaa">Prof. Alexandre da Costa Tavares Junior</p>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-01.png')"><div class="slide-img-placeholder">🗺️</div></div>
+<div class="slide-number">1 / 14</div>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Nossa Jornada</h2>
+<p><strong>O que percorremos:</strong></p>
+<ol>
+<li>Fundamentos da Computação em Nuvem</li>
+<li>Modelos de Implantação e Multi-cloud</li>
+<li>Redes Virtuais (VPC, sub-redes)</li>
+<li>Arquiteturas de Referência</li>
+<li>Balanceamento de Carga e CDN</li>
+<li>Segurança de Rede</li>
+<li>Observabilidade</li>
+<li>Infraestrutura como Código (IaC)</li>
+<li>FinOps e Otimização de Custos</li>
+</ol>
+<div class="highlight"><strong>Objetivo de hoje:</strong> Conectar tudo em uma visão integrada.</div>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-02.png')"><div class="slide-img-placeholder">🧭</div></div>
+<div class="slide-number">2 / 14</div>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Fundamentos (Aulas 1-3)</h2>
+<p><strong>Definição NIST — 5 características essenciais:</strong></p>
+<ul>
+<li>🖱️ Autoatendimento sob demanda</li>
+<li>🌐 Amplo acesso pela rede</li>
+<li>🔄 Pooling de recursos (multilocação)</li>
+<li>📈 Elasticidade rápida</li>
+<li>📊 Serviço medido (pay-as-you-go)</li>
+</ul>
+<table>
+<tr><th>Modelo</th><th>O que o provedor gerencia</th></tr>
+<tr><td>IaaS</td><td>Infraestrutura (VMs, rede)</td></tr>
+<tr><td>PaaS</td><td>Plataforma (+ SO, runtime)</td></tr>
+<tr><td>SaaS</td><td>Software completo</td></tr>
+</table>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-03.png')"><div class="slide-img-placeholder">☁️</div></div>
+<div class="slide-number">3 / 14</div>
+</div>
+
+<!-- Slide 4 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Modelos de Implantação (Aulas 4-5)</h2>
+<table>
+<tr><th>Modelo</th><th>Característica-chave</th></tr>
+<tr><td>☁️ Pública</td><td>Economia de escala, OpEx</td></tr>
+<tr><td>🔒 Privada</td><td>Controle total, isolamento</td></tr>
+<tr><td>👥 Comunitária</td><td>Compartilhamento setorial</td></tr>
+<tr><td>🔗 Híbrida</td><td>Pública + privada (cloud bursting)</td></tr>
+</table>
+<div class="highlight">
+<strong>Multi-cloud:</strong> Múltiplos provedores públicos → evitar lock-in, best-of-breed. Atenção ao egress.
+</div>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-04.png')"><div class="slide-img-placeholder">🏗️</div></div>
+<div class="slide-number">4 / 14</div>
+</div>
+
+<!-- Slide 5 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Redes Virtuais (Aula 6)</h2>
+<p><strong>VPC / VNet — a base de tudo:</strong></p>
+<ul>
+<li>CIDR: planejamento do espaço de endereços</li>
+<li>Sub-redes públicas (rota p/ IGW) vs. privadas (via NAT)</li>
+<li>Tabelas de roteamento</li>
+<li>Internet Gateway (bidirecional) + NAT Gateway (egress)</li>
+<li><strong>Security Groups</strong> (stateful, instância) + <strong>NACLs</strong> (stateless, sub-rede)</li>
+<li>VPC Peering vs. Transit Gateway</li>
+</ul>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-05.png')"><div class="slide-img-placeholder">🌐</div></div>
+<div class="slide-number">5 / 14</div>
+</div>
+
+<!-- Slide 6 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Arquiteturas de Referência (Aula 7)</h2>
+<div class="highlight">
+<strong>Well-Architected: 5 pilares</strong><br>
+⚙️ Operacional | 🔒 Segurança | 🔄 Confiabilidade | ⚡ Performance | 💰 Custos
+</div>
+<p style="margin-top:12px"><strong>Padrões:</strong></p>
+<ul>
+<li><strong>Three-Tier:</strong> apresentação / aplicação / dados</li>
+<li><strong>Microsserviços vs. Monolito:</strong> independência vs. simplicidade</li>
+<li><strong>Serverless:</strong> zero gerenciamento, custo por execução</li>
+<li><strong>Event-Driven:</strong> desacoplamento e resiliência</li>
+</ul>
+<p><strong>HA + Escalabilidade:</strong> Multi-AZ, Auto Scaling, DR</p>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-06.png')"><div class="slide-img-placeholder">📐</div></div>
+<div class="slide-number">6 / 14</div>
+</div>
+
+<!-- Slide 7 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Entrega: LB e CDN (Aula 8)</h2>
+<div class="two-col">
+<div class="card">
+<h3>⚖️ Load Balancer</h3>
+<ul>
+<li>ALB (L7, HTTP)</li>
+<li>NLB (L4, performance)</li>
+<li>GWLB (L3, appliances)</li>
+<li>Health checks</li>
+</ul>
+</div>
+<div class="card">
+<h3>🌍 CDN</h3>
+<ul>
+<li>Edge locations globais</li>
+<li>Cache hit vs. miss, TTL</li>
+<li>Proteção DDoS</li>
+<li>Edge computing</li>
+</ul>
+</div>
+</div>
+<div class="highlight" style="margin-top:15px">
+<strong>Juntos:</strong> CDN absorve estático, LB distribui dinâmico.
+</div>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-07.png')"><div class="slide-img-placeholder">🚀</div></div>
+<div class="slide-number">7 / 14</div>
+</div>
+
+<!-- Slide 8 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Segurança (Aula 9)</h2>
+<div class="highlight">
+<strong>Responsabilidade Compartilhada:</strong> Provedor protege a nuvem | Cliente protege NA nuvem
+</div>
+<p style="margin-top:12px"><strong>Defesa em Profundidade (camadas):</strong></p>
+<ul>
+<li>WAF + DDoS (borda)</li>
+<li>Security Groups + NACLs (rede)</li>
+<li>IAM + menor privilégio (identidade)</li>
+<li>Criptografia em trânsito e repouso (dados)</li>
+</ul>
+<p><strong>Monitoramento:</strong> Flow Logs, CloudTrail, GuardDuty</p>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-08.png')"><div class="slide-img-placeholder">🛡️</div></div>
+<div class="slide-number">8 / 14</div>
+</div>
+
+<!-- Slide 9 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Operações Modernas (Aulas 10-12)</h2>
+<table>
+<tr><th>Disciplina</th><th>Objetivo</th><th>Ferramentas</th></tr>
+<tr><td>📊 Observabilidade</td><td>Enxergar o sistema</td><td>CloudWatch, X-Ray</td></tr>
+<tr><td>⚙️ IaC</td><td>Automatizar/versionar</td><td>Terraform</td></tr>
+<tr><td>💰 FinOps</td><td>Otimizar custos</td><td>Cost Explorer</td></tr>
+</table>
+<ul>
+<li><strong>Observabilidade:</strong> métricas, logs, traces + Golden Signals + SLOs</li>
+<li><strong>IaC:</strong> declarativo, GitOps, elimina drift</li>
+<li><strong>FinOps:</strong> Informar → Otimizar → Operar</li>
+</ul>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-09.png')"><div class="slide-img-placeholder">🔧</div></div>
+<div class="slide-number">9 / 14</div>
+</div>
+
+<!-- Slide 10 -->
+<div class="slide">
+<div class="slide-content">
+<h2>A Visão Integrada</h2>
+<p><strong>Toda boa arquitetura equilibra 5 dimensões:</strong></p>
+<table>
+<tr><th>Dimensão</th><th>Pergunta</th></tr>
+<tr><td>Funcionalidade</td><td>Atende ao negócio?</td></tr>
+<tr><td>Performance</td><td>É rápido e escalável?</td></tr>
+<tr><td>Confiabilidade</td><td>Recupera de falhas?</td></tr>
+<tr><td>Segurança</td><td>Está protegido?</td></tr>
+<tr><td>Custo</td><td>É eficiente financeiramente?</td></tr>
+</table>
+<div class="highlight">
+<strong>Toda decisão é um trade-off.</strong> Não maximize uma dimensão destruindo as outras.
+</div>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-10.png')"><div class="slide-img-placeholder">⚖️</div></div>
+<div class="slide-number">10 / 14</div>
+</div>
+
+<!-- Slide 11 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Dicas para a Avaliação Final</h2>
+<p><strong>Foque em:</strong></p>
+<ul>
+<li>✅ Definições do NIST e modelos de serviço/implantação</li>
+<li>✅ Funcionamento das redes virtuais (VPC, roteamento, gateways)</li>
+<li>✅ Padrões arquiteturais e seus cenários de uso</li>
+<li>✅ Responsabilidade compartilhada e defesa em profundidade</li>
+<li>✅ Objetivos de observabilidade, IaC e FinOps</li>
+<li>✅ <strong>Análise de cenários:</strong> dado um problema, qual a melhor solução?</li>
+</ul>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-11.png')"><div class="slide-img-placeholder">📝</div></div>
+<div class="slide-number">11 / 14</div>
+</div>
+
+<!-- Slide 12 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Encerramento</h2>
+<div class="highlight">
+<strong>Parabéns pela jornada!</strong> Vocês agora dominam:
+<ul style="margin-top:10px">
+<li>Os fundamentos e modelos da computação em nuvem</li>
+<li>A infraestrutura de rede e conectividade</li>
+<li>Arquiteturas, entrega e segurança</li>
+<li>As disciplinas operacionais modernas</li>
+</ul>
+</div>
+<p style="margin-top:15px;font-size:1.15em">Uma base sólida para atuar profissionalmente com redes em nuvem.</p>
+<p style="margin-top:10px"><strong>Sigam praticando, construindo e aprendendo. Sucesso na carreira!</strong></p>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-12.png')"><div class="slide-img-placeholder">🎓</div></div>
+<div class="slide-number">12 / 14</div>
+</div>
+
+<!-- Slide 13 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Referências</h2>
+<ul>
+<li>AMAZON WEB SERVICES. <em>AWS Well-Architected Framework</em>. AWS Documentation, 2024.</li>
+<li>BEYER, B. et al. <em>Site Reliability Engineering</em>. O'Reilly Media, 2016.</li>
+<li>KAVIS, M. J. <em>Architecting the Cloud</em>. Hoboken: Wiley, 2014.</li>
+<li>MELL, P.; GRANCE, T. <em>The NIST Definition of Cloud Computing</em>. SP 800-145. NIST, 2011.</li>
+<li>MORRIS, K. <em>Infrastructure as Code</em>. 2. ed. O'Reilly Media, 2020.</li>
+<li>VERAS, M. <em>Cloud Computing</em>. 2. ed. Brasport, 2019.</li>
+</ul>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-13.png')"><div class="slide-img-placeholder">📚</div></div>
+<div class="slide-number">13 / 14</div>
+</div>
+
+<!-- Slide 14 -->
+<div class="slide">
+<div class="slide-content">
+<h2>Atividade</h2>
+<div class="card">
+<h3>📝 Tarefa Formativa (TF)</h3>
+<p>Responda às 8 questões objetivas de revisão geral disponíveis no ambiente virtual.</p>
+</div>
+<div class="card" style="margin-top:20px">
+<h3>💭 Para reflexão final</h3>
+<p>Escolha um sistema real (app de delivery, loja online, streaming). Descreva como o arquitetaria na nuvem integrando tudo: modelo de implantação, rede, arquitetura, entrega, segurança, observabilidade e custos. Justifique cada decisão pelas cinco dimensões.</p>
+</div>
+</div>
+<div class="slide-img" style="background-image:url('img/slide-14.png')"><div class="slide-img-placeholder">✍️</div></div>
+<div class="slide-number">14 / 14</div>
+</div>
+
+<!-- Navegação -->
+<div class="nav">
+<button onclick="prevSlide()">← Anterior</button>
+<button onclick="toggleFullscreen()">⛶ Tela Cheia</button>
+<button onclick="nextSlide()">Próximo →</button>
+</div>
+
+<script>
+let current=0;
+const slides=document.querySelectorAll('.slide');
+const total=slides.length;
+const progress=document.getElementById('progress');
+function showSlide(n){
+slides[current].classList.remove('active');
+current=((n%total)+total)%total;
+slides[current].classList.add('active');
+progress.style.width=((current+1)/total*100)+'%';
+}
+function nextSlide(){showSlide(current+1)}
+function prevSlide(){showSlide(current-1)}
+function toggleFullscreen(){
+if(!document.fullscreenElement)document.documentElement.requestFullscreen();
+else document.exitFullscreen();
+}
+document.addEventListener('keydown',e=>{
+if(e.key==='ArrowRight'||e.key===' ')nextSlide();
+if(e.key==='ArrowLeft')prevSlide();
+if(e.key==='f')toggleFullscreen();
+});
+document.addEventListener('click',e=>{
+if(e.target.tagName!=='BUTTON'){
+const x=e.clientX/window.innerWidth;
+if(x>.65)nextSlide();else if(x<.35)prevSlide();
+}
+});
+</script>
+</body>
+</html>
